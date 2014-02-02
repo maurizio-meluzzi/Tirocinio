@@ -1,17 +1,23 @@
 package com.tiscali.tirocini.model;
+
 import java.util.Set;
 
 public class Offerta
 {
-	private long id;
-	private String descrizione;
+	private long			id;
+	private String			descrizione;
 
-	private Set<Tirocinio> tirocinio;
-	private Azienda azienda;
+	private Set<Tirocinio>	tirocinio;
+	private Azienda			azienda;
 
-	public Offerta(){
+
+	public Offerta(String descrizione)
+	{
+		// TODO trovare il modo per valorizzare l'id (come, quando)
 		super();
+		this.descrizione = descrizione;
 	}
+
 
 	public long getId()
 	{
@@ -22,25 +28,33 @@ public class Offerta
 		this.id = id;
 	}
 
-	public String getDescrizione() {
+
+	public String getDescrizione()
+	{
 		return descrizione;
 	}
-	public void setDescrizione(String descrizione) {
+	public void setDescrizione(String descrizione)
+	{
 		this.descrizione = descrizione;
 	}
 
-	public Set<Tirocinio> getTirocinio() {
+
+	public Set<Tirocinio> getTirocinio()
+	{
 		return tirocinio;
 	}
-	public void setTirocinio(Set<Tirocinio> tirocinio) {
+	public void setTirocinio(Set<Tirocinio> tirocinio)
+	{
 		this.tirocinio = tirocinio;
 	}
 
-	public Azienda getAzienda() {
+
+	public Azienda getAzienda()
+	{
 		return azienda;
 	}
-	public void setAzienda(Azienda azienda) {
+	public void setAzienda(Azienda azienda)
+	{
 		this.azienda = azienda;
 	}
 }
-

@@ -2,15 +2,22 @@ package com.tiscali.tirocini.model;
 
 public class Tirocinio
 {
-	private long id;
-	private String descrizione;
-	private Offerta offerta;
-	private Azienda azienda;
-	private Accordo accordo;
+	private long	id;
+	private String	descrizione;
 
-	public Tirocinio(){
+	private Offerta	offerta;
+	private Accordo	accordo;
+
+	private Azienda	azienda;
+
+
+	public Tirocinio(String descrizione)
+	{
+		// TODO trovare il modo per valorizzare l'id (come, quando)
 		super();
+		this.descrizione = descrizione;
 	}
+
 
 	public long getId()
 	{
@@ -21,32 +28,43 @@ public class Tirocinio
 		this.id = id;
 	}
 
-	public String getDescrizione() {
+
+	public String getDescrizione()
+	{
 		return descrizione;
 	}
-	public void setDescrizione(String descrizione) {
+	public void setDescrizione(String descrizione)
+	{
 		this.descrizione = descrizione;
 	}
 
-	public Offerta getOfferta() {
+
+	public Offerta getOfferta()
+	{
 		return offerta;
 	}
-	public void setOfferta(Offerta offerta) {
+	public void setOfferta(Offerta offerta)
+	{
 		this.offerta = offerta;
 	}
 
-	public Azienda getAzienda() {
+
+	public Azienda getAzienda()
+	{
 		return azienda;
 	}
-	public void setAzienda(Azienda azienda) {
+	public void setAzienda(Azienda azienda)
+	{
 		this.azienda = azienda;
 	}
 
-	public Accordo getAccordo() {
+
+	public Accordo getAccordo()
+	{
 		return accordo;
 	}
-	public void setAccordo(Accordo accordo) {
+	public void setAccordo(Accordo accordo)
+	{
 		this.accordo = accordo;
 	}
 }
-

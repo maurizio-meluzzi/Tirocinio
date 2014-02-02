@@ -2,17 +2,14 @@ package com.tiscali.tirocini.model;
 
 public class Responsabile extends Persona
 {
-	private Universita	universita;
 	private Accordo		accordo;
 
-	public Universita getUniversita()
+
+	public Responsabile(String nome, String cognome, String cf)
 	{
-		return universita;
+		super(nome, cognome, cf);
 	}
-	public void setUniversita(Universita universita)
-	{
-		this.universita = universita;
-	}
+
 
 	public Accordo getAccordo()
 	{
@@ -21,5 +18,13 @@ public class Responsabile extends Persona
 	public void setAccordo(Accordo accordo)
 	{
 		this.accordo = accordo;
+	}
+
+
+	@Override
+	public int hashCode()
+	{
+		// HashCode for Responsabile is 400
+		return 400;
 	}
 }

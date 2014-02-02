@@ -9,7 +9,7 @@ public class TirocinioTest
 
 	public static void main(String[] args)
 	{
-		Azienda azienda = new Azienda();
+		Azienda azienda = new Azienda("aaa", "bbb");
 		try
 		{
 			proponiOfferta(azienda, "Descrizione Offerta");
@@ -23,8 +23,8 @@ public class TirocinioTest
 	
 	private static void proponiOfferta(Azienda azienda, String descrizioneOfferta) throws EntityNotFoundException
 	{
-		Universita univ = new Universita();
-		Azienda tmpAzienda = univ.getAzienda(azienda.getId());
+		Universita univ = new Universita("ccc");
+		Azienda tmpAzienda = univ.getAzienda(azienda.getPartitaIva());
 		if (tmpAzienda == null)
 		{
 			throw new EntityNotFoundException();

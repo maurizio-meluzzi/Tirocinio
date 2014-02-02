@@ -1,19 +1,22 @@
 package com.tiscali.tirocini.model;
 
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 public class Universita
 {
-	private String						descrizione;
+	private String					descrizione;
 
-	private Set<Studente>				studenti;
-	private Set<Responsabile>			responsabili;
-	private HashMap<Long, Azienda>	aziende;
+	private Map<String, Studente>		studenti;
+	private Map<String, Responsabile>	responsabili;
+	private Map<String, Azienda>		aziende;
 
-	public Universita()
+	public Universita(String descrizione)
 	{
 		super();
+		this.descrizione = descrizione;
+		studenti         = new HashMap<String, Studente>();
+		responsabili     = new HashMap<String, Responsabile>();
+		aziende          = new HashMap<String, Azienda>();
 	}
 
 	public String getDescrizione()
@@ -26,40 +29,54 @@ public class Universita
 		this.descrizione = descrizione;
 	}
 
-	private Set<Studente> getStudenti()
+	private Map<String, Studente> getStudenti()
 	{
 		return studenti;
 	}
 
-	private Set<Responsabile> getResponsabili()
+	private Map<String, Responsabile> getResponsabili()
 	{
 		return responsabili;
 	}
 
+	public Map<String, Azienda> getAziende()
+	{
+		return aziende;
+	}
+
 	public Studente getStudente(String cf)
 	{
-		// getStudenti().contains(cf)
-		return null;
+		return this.getStudenti().get(cf);
 	}
 
 	public Studente addStudente(String nome, String cognome, String cf)
 	{
 		Studente tmpStudente = new Studente(nome, cognome, cf);
-		// COMPLETARE A PARTIRE DA QUI
+		this.getStudenti().put(cf, tmpStudente);
 		return tmpStudente;
 	}
 
-	public HashMap<Long, Azienda> getAziende()
+	public Responsabile getResponsabile(String cf)
 	{
-		return aziende;
+		return this.getResponsabili().get(cf);
 	}
-	
-	public Azienda getAzienda(long id)
+
+	public Responsabile addResponsabile(String nome, String cognome, String cf)
 	{
-		return aziende.get(id);
+		Responsabile tmpResponsabile = new Responsabile(nome, cognome, cf);
+		this.getResponsabili().put(cf, tmpResponsabile);
+		return tmpResponsabile;
 	}
-	public void addAzienda(Azienda azienda)
+
+	public Azienda getAzienda(String partitaIva)
 	{
-		aziende.put(azienda.getId(), azienda);
+		return this.getAziende().get(partitaIva);
+	}
+
+	public Azienda addAzienda(String ragioneSociale, String partitaIva)
+	{
+		Azienda tmpAzienda = new Azienda(ragioneSociale, partitaIva);
+		this.getAziende().put(partitaIva, tmpAzienda);
+		return tmpAzienda;
 	}
 }

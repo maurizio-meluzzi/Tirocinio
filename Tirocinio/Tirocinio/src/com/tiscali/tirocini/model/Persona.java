@@ -6,10 +6,6 @@ public abstract class Persona
 	private String	cognome;
 	private String	cf;
 
-	public Persona()
-	{
-		super();
-	}
 
 	public Persona(String nome, String cognome, String cf)
 	{
@@ -18,6 +14,7 @@ public abstract class Persona
 		this.cognome = cognome;
 		this.cf = cf;
 	}
+
 
 	public String getNome()
 	{
@@ -28,6 +25,7 @@ public abstract class Persona
 		this.nome = nome;
 	}
 
+
 	public String getCognome()
 	{
 		return cognome;
@@ -37,6 +35,7 @@ public abstract class Persona
 		this.cognome = cognome;
 	}
 
+
 	public String getCf()
 	{
 		return cf;
@@ -45,6 +44,7 @@ public abstract class Persona
 	{
 		this.cf = cf;
 	}
+
 
 	@Override
 	public boolean equals(Object obj)
