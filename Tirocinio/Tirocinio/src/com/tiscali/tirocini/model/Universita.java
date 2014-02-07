@@ -3,6 +3,7 @@ package com.tiscali.tirocini.model;
 import java.util.*;
 
 import com.tiscali.tirocini.exceptions.DuplicatedEntityException;
+import com.tiscali.tirocini.exceptions.EntityNotFoundException;
 
 public class Universita
 {
@@ -41,7 +42,7 @@ public class Universita
 		return responsabili;
 	}
 
-	public Map<String, Azienda> getAziende()
+	private Map<String, Azienda> getAziende()
 	{
 		return aziende;
 	}
@@ -53,7 +54,7 @@ public class Universita
 
 	public Studente createStudente(String nome, String cognome, String cf) throws DuplicatedEntityException
 	{
-		if (this.getStudenti().containsKey(cf)) throw new DuplicatedEntityException("Esiste gi√† uno studente con il seguente CF:" + cf);
+		if (this.getStudenti().containsKey(cf)) throw new DuplicatedEntityException("Esiste gi‡† uno studente con il seguente CF:" + cf);
 
 		Studente studente = new Studente(nome, cognome, cf);
 		this.getStudenti().put(cf, studente);
@@ -73,6 +74,22 @@ public class Universita
 		}
 	}
 
+	public Studente aggiornaStudente(String cf, String nome, String cognome) throws EntityNotFoundException
+	{
+		Studente studente = this.getStudenti().remove(cf);
+		if (studente != null)
+		{
+			studente.setNome(nome);
+			studente.setCognome(cognome);
+			this.getStudenti().put(cf, studente);
+			return studente;
+		}
+		else
+		{
+			throw new EntityNotFoundException("Nessuno studente associato al CF fornito:" + cf);
+		}
+	}
+
 
 
 	public Responsabile getResponsabile(String cf)
@@ -82,7 +99,7 @@ public class Universita
 
 	public Responsabile createResponsabile(String nome, String cognome, String cf) throws DuplicatedEntityException
 	{
-		if (this.getResponsabili().containsKey(cf)) throw new DuplicatedEntityException("Esiste gi√† un responsabile con il seguente CF:" + cf);
+		if (this.getResponsabili().containsKey(cf)) throw new DuplicatedEntityException("Esiste gi‡† un responsabile con il seguente CF:" + cf);
 
 		Responsabile responsabile = new Responsabile(nome, cognome, cf);
 		this.getResponsabili().put(cf, responsabile);
@@ -102,6 +119,22 @@ public class Universita
 		}
 	}
 
+	public Responsabile aggiornaResponsabile(String cf, String nome, String cognome) throws EntityNotFoundException
+	{
+		Responsabile responsabile = this.getResponsabili().remove(cf);
+		if (responsabile != null)
+		{
+			responsabile.setNome(nome);
+			responsabile.setCognome(cognome);
+			this.getResponsabili().put(cf, responsabile);
+			return responsabile;
+		}
+		else
+		{
+			throw new EntityNotFoundException("Nessun responsabile associato al CF fornito:" + cf);
+		}
+	}
+
 
 
 	public Azienda getAzienda(String partitaIva)
@@ -111,7 +144,7 @@ public class Universita
 
 	public Azienda createAzienda(String ragioneSociale, String partitaIva) throws DuplicatedEntityException
 	{
-		if (this.getAziende().containsKey(partitaIva)) throw new DuplicatedEntityException("Esiste gi√† un azienda con la seguente P.IVA:" + partitaIva);
+		if (this.getAziende().containsKey(partitaIva)) throw new DuplicatedEntityException("Esiste gi‡ un'azienda con la seguente P.IVA:" + partitaIva);
 
 		Azienda azienda = new Azienda(ragioneSociale, partitaIva);
 		this.getAziende().put(partitaIva, azienda);
@@ -128,6 +161,21 @@ public class Universita
 		{
 			this.getAziende().put(azienda.getPartitaIva(), azienda);
 			return true;
+		}
+	}
+
+	public Azienda aggiornaAzienda(String partitaIva, String ragioneSociale) throws EntityNotFoundException
+	{
+		Azienda azienda = this.getAziende().remove(partitaIva);
+		if (azienda != null)
+		{
+			azienda.setRagioneSociale(ragioneSociale);
+			this.getAziende().put(partitaIva, azienda);
+			return azienda;
+		}
+		else
+		{
+			throw new EntityNotFoundException("Nessuna azienda associata alla Partita Iva fornita:" + partitaIva);
 		}
 	}
 }

@@ -7,11 +7,11 @@ public class DuplicatedEntityException extends Exception
 
 	public DuplicatedEntityException()
 	{
-		super("Cannot duplicate this entity");
+		super("La duplicazione dell'oggetto non è consentita");
 	}
 	
 	public DuplicatedEntityException(String arg0)
 	{
-		super("Cannot duplicate this entity - " + arg0 );
+		super("La duplicazione dell'oggetto non è consentita - " + arg0 );
 	}
 }

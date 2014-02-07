@@ -58,4 +58,10 @@ public abstract class Persona
 			return false;
 		}
 	}
+
+	@Override
+	public String toString()
+	{
+		return this.getNome() + " " + this.getCognome();
+	}	
 }

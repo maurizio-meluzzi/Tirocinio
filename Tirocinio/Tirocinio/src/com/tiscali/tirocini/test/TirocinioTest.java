@@ -5,11 +5,23 @@ import com.tiscali.tirocini.exceptions.*;
 
 public class TirocinioTest
 {
+	static Universita universita;
 
 	public static void main(String[] args)
 	{
+		universita = new Universita("Cagliari");
+
+		creazioneStudenteTest();
+		aggiornamentoStudente();
+
+
+
+
+	}
+
+	private static void creazioneStudenteTest()
+	{
 		// -01----------- CREAZIONE STUDENTE ------------
-		Universita universita = new Universita("Cagliari");
 		try
 		{
 			Studente studenteA = universita.createStudente("Mario", "Bianchi", "MRBNCH01A01H118J");
@@ -18,28 +30,46 @@ public class TirocinioTest
 			System.out.println("Creato nuovo Studente: " + studenteB);
 			Studente studenteC = universita.createStudente("Mario", "Verdi",   "VRDMRA80A01B354S");
 			System.out.println("Creato nuovo Studente: " + studenteC);
-			
+			Studente studenteD = universita.createStudente("Marco", "Viola",   "VRDMRA80A01B354S");
+			System.out.println("Creato nuovo Studente: " + studenteD);
 		}
 		catch (DuplicatedEntityException e1)
 		{
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			System.out.println("Errore: " + e1.getMessage());
+			// e1.printStackTrace();
 		}
-
-		Azienda azienda = new Azienda("aaa", "bbb");
-		try
-		{
-			proponiOfferta(azienda, "Descrizione Offerta");
-		}
-		catch (EntityNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-
 	}
 
+
+	private static void aggiornamentoStudente()
+	{
+		// -02----------- AGGIORNAMENTO DATI STUDENTE ------------
+		try   
+		{
+			Studente studenteA = universita.aggiornaStudente("MRBNCH01A01H118J", "Mario", "Bianco");
+			System.out.println("Aggiornato Studente: " + studenteA);
+			Studente studenteB = universita.aggiornaStudente("RSSMRA80A01H354W", "Mario", "Rosso");
+			System.out.println("Aggiornato Studente: " + studenteB);
+		}
+		catch (EntityNotFoundException e1)
+		{
+			System.out.println("Errore: " + e1.getMessage());
+			// e1.printStackTrace();
+		}
+	}
+/*
 	private static void proponiOfferta(Azienda azienda, String descrizioneOfferta) throws EntityNotFoundException
 	{
+//		Azienda azienda = new Azienda("aaa", "bbb");
+//		try
+//		{
+//			proponiOfferta(azienda, "Descrizione Offerta");
+//		}
+//		catch (EntityNotFoundException e)
+//		{
+//			e.printStackTrace();
+//		}
+		
 		Universita univ = new Universita("ccc");
 		Azienda tmpAzienda = univ.getAzienda(azienda.getPartitaIva());
 		if (tmpAzienda == null)
@@ -52,5 +82,15 @@ public class TirocinioTest
 		}
 
 	}
-
+//	x creazione studente               attore:responsabile    
+//	- aggiornamento studente           attore:responsabile
+//	- registrazione azienda            attore: azienda
+//	- proposta offerta                 attore: azienda
+//	- approvazione/rifiuto offerta     attore:responsabile                                                 rorru
+//	- visualizza offerte               attore:studente                                                      ldeprisco
+//	- proponi candidatura              attore:studente  [offerta]                                       lbartolomai
+//	- accettazione candidatura         attore: azienda [offerta ---> tirocinio]                      cvittoli
+//	- approvazione tirocinio           attore:responsabile [tirocinio---> accordo]               mmeluzzi
+//	- stampa accordo                   attore:responsabile                                                rorru
+*/
 }

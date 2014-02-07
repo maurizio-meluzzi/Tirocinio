@@ -7,11 +7,11 @@ public class EntityNotFoundException extends Exception
 
 	public EntityNotFoundException()
 	{
-		super("Did not found the requested entity");
+		super("L'oggetto richiesto non è stato trovato");
 	}
 	
 	public EntityNotFoundException(String arg0)
 	{
-		super("Did not found the requested entity - " + arg0 );
+		super("L'oggetto richiesto non è stato trovato - " + arg0 );
 	}
 }
