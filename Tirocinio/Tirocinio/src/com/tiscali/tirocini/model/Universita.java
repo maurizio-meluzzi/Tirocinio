@@ -32,17 +32,17 @@ public class Universita
 		this.descrizione = descrizione;
 	}
 
-	private Map<String, Studente> getStudenti()
+	public Map<String, Studente> getStudenti()
 	{
 		return studenti;
 	}
 
-	private Map<String, Responsabile> getResponsabili()
+	public Map<String, Responsabile> getResponsabili()
 	{
 		return responsabili;
 	}
 
-	private Map<String, Azienda> getAziende()
+	public Map<String, Azienda> getAziende()
 	{
 		return aziende;
 	}
