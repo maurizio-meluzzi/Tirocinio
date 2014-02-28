@@ -9,8 +9,7 @@ public class TirocinioTest
 
 	public static void main(String[] args)
 	{
-		universita = new Universita("Cagliari");
-
+		
 		creazioneStudenteTest();
 		aggiornamentoStudente();
 
@@ -24,13 +23,13 @@ public class TirocinioTest
 		// -01----------- CREAZIONE STUDENTE ------------
 		try
 		{
-			Studente studenteA = universita.createStudente("Mario", "Bianchi", "MRBNCH01A01H118J");
+			Studente studenteA = Universita.getInstance().createStudente("Mario", "Bianchi", "MRBNCH01A01H118J");
 			System.out.println("Creato nuovo Studente: " + studenteA);
-			Studente studenteB = universita.createStudente("Mario", "Rossi",   "RSSMRA80A01B354W");
+			Studente studenteB = Universita.getInstance().createStudente("Mario", "Rossi",   "RSSMRA80A01B354W");
 			System.out.println("Creato nuovo Studente: " + studenteB);
-			Studente studenteC = universita.createStudente("Mario", "Verdi",   "VRDMRA80A01B354S");
+			Studente studenteC = Universita.getInstance().createStudente("Mario", "Verdi",   "VRDMRA80A01B354S");
 			System.out.println("Creato nuovo Studente: " + studenteC);
-			Studente studenteD = universita.createStudente("Marco", "Viola",   "VRDMRA80A01B354S");
+			Studente studenteD = Universita.getInstance().createStudente("Marco", "Viola",   "VRDMRA80A01B354S");
 			System.out.println("Creato nuovo Studente: " + studenteD);
 		}
 		catch (DuplicatedEntityException e1)
@@ -46,9 +45,9 @@ public class TirocinioTest
 		// -02----------- AGGIORNAMENTO DATI STUDENTE ------------
 		try   
 		{
-			Studente studenteA = universita.aggiornaStudente("MRBNCH01A01H118J", "Mario", "Bianco");
+			Studente studenteA = Universita.getInstance().updateStudente("MRBNCH01A01H118J", "Mario", "Bianco");
 			System.out.println("Aggiornato Studente: " + studenteA);
-			Studente studenteB = universita.aggiornaStudente("RSSMRA80A01H354W", "Mario", "Rosso");
+			Studente studenteB = Universita.getInstance().updateStudente("RSSMRA80A01H354W", "Mario", "Rosso");
 			System.out.println("Aggiornato Studente: " + studenteB);
 		}
 		catch (EntityNotFoundException e1)

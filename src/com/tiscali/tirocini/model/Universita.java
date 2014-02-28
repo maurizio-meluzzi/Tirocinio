@@ -7,20 +7,38 @@ import com.tiscali.tirocini.exceptions.EntityNotFoundException;
 
 public class Universita
 {
+	private static Universita instance;
+
 	private String						descrizione;
 
 	private Map<String, Studente>		studenti;
 	private Map<String, Responsabile>	responsabili;
 	private Map<String, Azienda>		aziende;
 
-	public Universita(String descrizione)
+	/* ================================================================================================== */
+	/*                       IMPLEMENTAZIONE SINGLETON                                                    */
+	/* ================================================================================================== */
+
+	private Universita()
 	{
 		super();
-		this.descrizione = descrizione;
-		studenti = new HashMap<String, Studente>();
+		studenti     = new HashMap<String, Studente>();
 		responsabili = new HashMap<String, Responsabile>();
-		aziende = new HashMap<String, Azienda>();
+		aziende      = new HashMap<String, Azienda>();
 	}
+
+	public static Universita getInstance()
+	{
+		if(instance == null)
+		{
+			instance = new Universita();
+		}
+		return instance;
+	}
+
+	/* ================================================================================================== */
+	/*                       GETTER E SETTER DI "DEFAULT"                                                 */
+	/* ================================================================================================== */
 
 	public String getDescrizione()
 	{
@@ -32,25 +50,24 @@ public class Universita
 		this.descrizione = descrizione;
 	}
 
-	public Map<String, Studente> getStudenti()
+	private Map<String, Studente> getStudenti()
 	{
 		return studenti;
 	}
 
-	public Map<String, Responsabile> getResponsabili()
+	private Map<String, Responsabile> getResponsabili()
 	{
 		return responsabili;
 	}
 
-	public Map<String, Azienda> getAziende()
+	private Map<String, Azienda> getAziende()
 	{
 		return aziende;
 	}
 
-	public Studente getStudente(String cf)
-	{
-		return this.getStudenti().get(cf);
-	}
+	/* ================================================================================================== */
+	/*                       GESTIONE STUDENTI                                                            */
+	/* ================================================================================================== */
 
 	public Studente createStudente(String nome, String cognome, String cf) throws DuplicatedEntityException
 	{
@@ -61,36 +78,48 @@ public class Universita
 		return studente;
 	}
 
-	public boolean addStudente(Studente studente)
+	// metodo non utilizzato, introduce la possibilità di aggiungere alla collection studenti già istanziati
+	public boolean addStudente(Studente studente) throws DuplicatedEntityException
 	{
-		if (this.getStudenti().containsKey(studente.getCf()))
-		{
-			return false;
-		}
-		else
-		{
-			this.getStudenti().put(studente.getCf(), studente);
-			return true;
-		}
+		if (this.getStudenti().containsKey(studente.getCf())) throw new DuplicatedEntityException("Esiste già  uno studente con il seguente CF:" + studente.getCf());
+
+		this.getStudenti().put(studente.getCf(), studente);
+		return true;
 	}
 
-	public Studente aggiornaStudente(String cf, String nome, String cognome) throws EntityNotFoundException
+	public Studente getStudente(String cf) throws EntityNotFoundException
 	{
+		if (!this.getStudenti().containsKey(cf)) throw new EntityNotFoundException("Nessuno studente associato al CF:" + cf);
+		return this.getStudenti().get(cf);
+	}
+
+	public Collection<Studente> getStudentiCollection()
+	{
+		return this.getStudenti().values();
+	}
+
+	public Studente updateStudente(String cf, String nome, String cognome) throws EntityNotFoundException
+	{
+		if (!this.getStudenti().containsKey(cf)) throw new EntityNotFoundException("Nessuno studente associato al CF:" + cf);
+
 		Studente studente = this.getStudenti().remove(cf);
-		if (studente != null)
-		{
-			studente.setNome(nome);
-			studente.setCognome(cognome);
-			this.getStudenti().put(cf, studente);
-			return studente;
-		}
-		else
-		{
-			throw new EntityNotFoundException("Nessuno studente associato al CF fornito:" + cf);
-		}
+		studente.setNome(nome);
+		studente.setCognome(cognome);
+		this.getStudenti().put(cf, studente);
+
+		return studente;
+	}
+
+	public void deleteStudente(String cf) throws EntityNotFoundException
+	{
+		if (!this.getStudenti().containsKey(cf)) throw new EntityNotFoundException("Nessuno studente associato al CF:" + cf);
+		this.getStudenti().remove(cf);
 	}
 
 
+	/* ================================================================================================== */
+	/*                       GESTIONE RESPONSABILI                                                        */
+	/* ================================================================================================== */
 
 	public Responsabile getResponsabile(String cf)
 	{
@@ -135,7 +164,9 @@ public class Universita
 		}
 	}
 
-
+	/* ================================================================================================== */
+	/*                       GESTIONE AZIENDE                                                             */
+	/* ================================================================================================== */
 
 	public Azienda getAzienda(String partitaIva)
 	{
